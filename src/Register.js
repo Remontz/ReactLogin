@@ -55,12 +55,25 @@ const Register = () => {
         setErrMsg('')
     }, [user, pwd, matchPwd])
 
+    // handleSubmit function
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+        //to prevent JS hack
+        const v1 = USER_REGEX.test(user)
+        const v2 = PWD_REGEX.test(pwd)
+        if(!v1 || !v2) {
+            setErrMsg('Invalid Entry')
+            return
+        }
+        
+    }
+
 
   return (
     <section>
         <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'} aria-live='assertive'> {errMsg} </p>
         <h1>Register</h1>
-        <form>
+        <form onSubmit={handleSubmit}>
             <label htmlFor='username'>
                 Username:
                 <span className={validName ? 'valid' : 'hide'}>
