@@ -18,12 +18,16 @@ const Login = () => {
         setErrMsg('')
     }, [user, pwd])
 
+    const handleSubmit = async(e) => {
+        e.preventDefault()
+        
+    }
 
   return (
     <section>
         <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'} aria-live='assertive'> {errMsg} </p>
         <h1>Sign In</h1>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSubmit}>
             <label htmlFor='username'>
                 Username:
                 <input
