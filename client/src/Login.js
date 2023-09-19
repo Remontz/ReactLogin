@@ -20,9 +20,10 @@ const Login = () => {
 
 
   return (
-    <div>
-        
-    </div>
+    <section>
+        <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'} aria-live='assertive'> {errMsg} </p>
+        <h1>Sign In</h1>
+    </section>
   )
 }
 
