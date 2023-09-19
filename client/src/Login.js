@@ -1,5 +1,8 @@
 import {useRef, useState, useEffect, useContext} from 'react'
 import AuthContext from './context/AuthProvider'
+import axios from './api/axios'
+
+const LOGIN_URL = '/auth'
 
 const Login = () => {
     const { setAuth } = useContext(AuthContext)
@@ -22,6 +25,27 @@ const Login = () => {
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        
+        try{
+            const response = await axios.post(LOGIN_URL,
+                JSON.stringify({user, pwd}),
+                {
+                    headers: { 'Content-Type': 'application/json' },
+                    withCredentials: true
+                }
+            )
+            console.log(JSON.stringify(response?.data))    
+            console.log(JSON.stringify(response))
+            const accessToken = response?.data?.accessToken
+            const roles = response?.data?.roles
+            setAuth({user, pwd, roles, accessToken})    
+            setUser('')
+            setPwd('')
+            setSuccess(true)
+        } catch (err) {
+            
+        }
+
         
     }
 
